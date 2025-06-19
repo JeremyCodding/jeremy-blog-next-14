@@ -12,6 +12,12 @@ export type CreateBlogPostType = {
     body: string,
     blogId: string
 }
+export type UpdateBlogPostType = {
+    title: string, 
+    subtitle: string, 
+    slug: string,
+    body: string,
+}
 
 export const getBlogPosts = async ({ blogSlug }: { blogSlug: string }) => {
     const session = await auth()
@@ -80,7 +86,7 @@ export const createBlogPost = async ({ data }: { data: CreateBlogPostType}) => {
     revalidatePath('/admin/posts')
 }
 
-export const updateBlogPost = async ({ postId, data }: { postId: string, data: CreateBlogPostType}) => {
+export const updateBlogPost = async ({ postId, data }: { postId: string, data: UpdateBlogPostType}) => {
     const post = await prisma.post.findUnique({
         where: {
             id: postId,
