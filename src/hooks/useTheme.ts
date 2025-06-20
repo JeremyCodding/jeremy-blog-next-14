@@ -1,16 +1,16 @@
 import { useThemeStore } from "@/stores/themeStore"
 
 export const useTheme = () => {
-    const  { theme, setTheme } = useThemeStore()
+    const { theme, setTheme } = useThemeStore()
 
     const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light'
+        const newTheme = theme === 'light' ? 'dark' : 'light';
 
         setTheme(newTheme)
         localStorage.setItem('theme', newTheme)
 
-        document.body.classList.remove(theme)
-        document.body.classList.add(newTheme)
+        document.body.classList.remove(theme);
+        document.body.classList.add(newTheme);
     }
 
     const getSavedTheme = () => {
@@ -18,9 +18,11 @@ export const useTheme = () => {
 
         if (savedTheme === 'light' || savedTheme === 'dark') {
             setTheme(savedTheme)
+        }
+
+        if (savedTheme) {
             document.body.classList.add(savedTheme)
         } else {
-            setTheme('light')
             document.body.classList.add('light')
         }
     }
@@ -28,6 +30,6 @@ export const useTheme = () => {
     return {
         theme,
         toggleTheme,
-        getSavedTheme,
+        getSavedTheme
     }
 }
